@@ -32,3 +32,36 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
 // Muat semua foto warna lebih dulu supaya ganti warna langsung tampil
 products.forEach(p=>p[2].forEach(n=>{const i=new Image();i.src=`assets/products/${slug(p[0])}-${slug(n)}.jpg`;}));
+
+// Mix & Match: model berganti outfit sesuai pilihan
+(function(){
+  const atasan=[["Relaxed Oversized Shirt",["Off White","Dusty Blue"]],["Minimalist Loose Blouse",["Sand","Olive"]],["Basic Knit Top",["Charcoal","Dusty Rose"]]];
+  const celana=["Black","Mocha"];
+  const box=document.getElementById("mix");if(!box)return;
+  const img=document.getElementById("mix-img"),elA=document.getElementById("mix-atasan"),elW=document.getElementById("mix-warna"),elC=document.getElementById("mix-celana");
+  let a=0,w=0,c=0;
+  const file=(ai,wi,ci)=>`assets/mix/${slug(atasan[ai][0])}-${slug(atasan[ai][1][wi])}_${slug(celana[ci])}.jpg`;
+  atasan.forEach((x,ai)=>x[1].forEach((_,wi)=>celana.forEach((_,ci)=>{const i=new Image();i.src=file(ai,wi,ci);})));
+  const chip=(n,on,k)=>`<button type="button" aria-pressed="${on}" data-${k}="${n}"><span class="dot" style="background:${C[n]}"></span>${n}</button>`;
+  function tampil(){
+    elA.innerHTML=atasan.map((x,i)=>`<button type="button" aria-pressed="${i==a}" data-a="${i}"><img src="assets/products/${slug(x[0])}-${slug(x[1][i==a?w:0])}.jpg" alt="" loading="lazy">${x[0]}</button>`).join("");
+    elW.innerHTML=atasan[a][1].map((n,i)=>chip(n,i==w,"w")).join("");
+    elC.innerHTML=celana.map((n,i)=>chip(n,i==c,"c")).join("");
+    document.getElementById("mix-warna-nama").textContent="· "+atasan[a][1][w];
+    document.getElementById("mix-celana-nama").textContent="· "+celana[c];
+    const teks=`${atasan[a][0]} (${atasan[a][1][w]}) + Wide-Leg Tailored Pants (${celana[c]})`;
+    document.getElementById("mix-ringkas").textContent=teks;
+    const src=file(a,w,c);
+    if(img.getAttribute("src")!==src){img.classList.add("ganti");const n=new Image();n.onload=()=>{img.src=src;img.alt="Model memakai "+teks;img.classList.remove("ganti")};n.src=src;}
+  }
+  box.addEventListener("click",e=>{
+    const b=e.target.closest("button");if(!b)return;
+    if(b.dataset.a!==undefined){a=+b.dataset.a;w=0;}
+    else if(b.dataset.w!==undefined){w=atasan[a][1].indexOf(b.dataset.w);}
+    else if(b.dataset.c!==undefined){c=celana.indexOf(b.dataset.c);}
+    else if(b.id==="mix-acak"){let na,nw,nc;do{na=Math.floor(Math.random()*3);nw=Math.floor(Math.random()*2);nc=Math.floor(Math.random()*2);}while(na==a&&nw==w&&nc==c);a=na;w=nw;c=nc;}
+    else return;
+    tampil();
+  });
+  tampil();
+})();

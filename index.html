@@ -19,7 +19,7 @@
   <a class="brand" href="#top" aria-label="WEDNESDAY">wednesday</a>
   <button class="burger" aria-label="Menu" aria-expanded="false">☰</button>
   <nav id="menu">
-    <a href="#koleksi">Koleksi</a><a href="#lookbook">Lookbook</a><a href="#tentang">Tentang</a><a href="#kontak">Kontak</a>
+    <a href="#koleksi">Koleksi</a><a href="#mix">Mix &amp; Match</a><a href="#lookbook">Lookbook</a><a href="#tentang">Tentang</a><a href="#kontak">Kontak</a>
   </nav>
 </header>
 <main id="top">
@@ -82,6 +82,35 @@
     <h2>Warna Kami</h2>
     <h3>Primary</h3><div id="primary" class="sw"></div>
     <h3>Supporting</h3><div id="support" class="sw"></div>
+  </div>
+</section>
+
+<section id="mix" class="wrap reveal">
+  <h2>Mix &amp; Match</h2>
+  <p class="mix-lead">Pilih atasan, warna, dan celana. Model langsung berganti outfit sesuai pilihanmu.</p>
+  <div class="mix">
+    <figure class="mix-foto">
+      <img id="mix-img" src="assets/mix/relaxed-oversized-shirt-off-white_black.jpg" alt="Model memakai Relaxed Oversized Shirt Off White dan Wide-Leg Tailored Pants Black" width="600" height="800">
+    </figure>
+    <div class="mix-panel">
+      <div class="mix-grup">
+        <h3>Atasan</h3>
+        <div class="mix-atasan" id="mix-atasan" role="group" aria-label="Pilih atasan"></div>
+      </div>
+      <div class="mix-grup">
+        <h3>Warna atasan <span id="mix-warna-nama"></span></h3>
+        <div class="chips" id="mix-warna" role="group" aria-label="Pilih warna atasan"></div>
+      </div>
+      <div class="mix-grup">
+        <h3>Celana: Wide-Leg Tailored Pants <span id="mix-celana-nama"></span></h3>
+        <div class="chips" id="mix-celana" role="group" aria-label="Pilih warna celana"></div>
+      </div>
+      <div class="mix-ringkas">
+        <p class="note" style="margin:0">Outfit kamu</p>
+        <p id="mix-ringkas"></p>
+        <button type="button" class="btn" id="mix-acak">Acak outfit</button>
+      </div>
+    </div>
   </div>
 </section>
 
