@@ -30,3 +30,5 @@ b.onclick=()=>{const o=m.classList.toggle("open");b.setAttribute("aria-expanded"
 m.onclick=e=>{if(e.target.tagName==="A"){m.classList.remove("open");b.setAttribute("aria-expanded",false)}};
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+// Muat semua foto warna lebih dulu supaya ganti warna langsung tampil
+products.forEach(p=>p[2].forEach(n=>{const i=new Image();i.src=`assets/products/${slug(p[0])}-${slug(n)}.jpg`;}));
