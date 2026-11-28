@@ -17,10 +17,10 @@ const looks=[
 ["Hybrid Day","Minimalist Loose Blouse (Sand) + Casual Sleeveless Vest (Navy)",["minimalist-loose-blouse-sand","casual-sleeveless-vest-navy"]],
 ["After Hours","Relaxed Shirt Dress (Mocha) + Basic Knit Top (Charcoal) sebagai layer",["relaxed-shirt-dress-mocha","basic-knit-top-charcoal"]]];
 const slug=t=>t.toLowerCase().replace(/\s+/g,"-");
-const img=(f,alt)=>`<img class="pimg" src="${f}.svg" alt="${alt}" width="400" height="480" loading="lazy">`;
+const img=(f,alt)=>`<img class="pimg" src="assets/products/${f}.jpg" alt="${alt}" width="400" height="480" loading="lazy" style="object-fit:cover">`;
 document.getElementById("products").innerHTML=products.map((p,i)=>`<article data-i="${i}">${img(slug(p[0])+"-"+slug(p[2][0]),p[0]+" warna "+p[2][0])}<h3>${p[0]}</h3><p>${p[3]}</p><div class="chips">${p[2].map((n,j)=>`<button type="button" aria-pressed="${j==0}" data-c="${n}"><span class="dot" style="background:${C[n]}"></span>${n}</button>`).join("")}</div><p class="note">Ukuran S–XXL · Harga segera hadir</p></article>`).join("");
 document.getElementById("products").onclick=e=>{const k=e.target.closest("button");if(!k)return;const a=k.closest("article"),p=products[a.dataset.i];
-a.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x==k));const im=a.querySelector("img");im.src=`${slug(p[0])}-${slug(k.dataset.c)}.svg`;im.alt=p[0]+" warna "+k.dataset.c};
+a.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x==k));const im=a.querySelector("img");im.src=`assets/products/${slug(p[0])}-${slug(k.dataset.c)}.jpg`;im.alt=p[0]+" warna "+k.dataset.c};
 document.getElementById("cats").innerHTML=cats.map(c=>`<article><h3>${c[0]}</h3><p>${c[1]}</p></article>`).join("");
 document.getElementById("looks").innerHTML=looks.map(l=>`<article><div class="pair">${l[2].map(f=>img(f,l[0])).join("")}</div><h3>${l[0]}</h3><p>${l[1]}</p></article>`).join("");
 const sw=(id,a)=>document.getElementById(id).innerHTML=a.map(n=>`<div><span style="background:${C[n]}"></span>${n}</div>`).join("");
